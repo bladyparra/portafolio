@@ -53,7 +53,7 @@ export class ProductosService {
                   setTimeout( () => {
                     this.cargando_productos = false;
                     this.productos = res.json();
-                    resolve();
+                    // resolve();
                   }, 1500);
                 });
     });
