@@ -23,7 +23,7 @@
     <div *ngIf="_ps.productos.length > 0 && !cargando_productos"
           class="ae-masonry ae-masonry-md-2 ae-masonry-xl-4 animated fadeIn">
       <a *ngFor="let producto of _ps.productos" 
-          href="portfolio-item.html" 
+          [routerLink]="[ '/producto', producto.cod ]" 
           class="rk-item ae-masonry__item">
         <img src="assets/productos/{{ producto.url }}" alt="">
         <div class="item-meta">

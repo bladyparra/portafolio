@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { 
   AboutComponent,
@@ -6,12 +6,12 @@ import {
   ProductoComponent
  } from "./components/index.paginas";
 
-const app_route: Routes = [
+const app_routes: Routes = [
   { path: 'home', component: PortafolioComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'producto', component: ProductoComponent },
+  { path: 'producto/:id', component: ProductoComponent },
   { path: '**', pathMatch: 'full', redirectTo: '' }
 ];
 
-export const app_routing = RouterModule.forRoot (app_route, {useHash: true});
+export const app_routing = RouterModule.forRoot (app_routes, {useHash: true});
 
