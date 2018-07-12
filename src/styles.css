@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* SVG */
+
+svg path,
+svg rect {
+  fill: black;
+}
+
 /* Animaciones */
 
 .animated {
