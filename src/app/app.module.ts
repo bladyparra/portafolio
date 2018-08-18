@@ -1,23 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpModule } from "@angular/http";
+import { HttpClientModule } from '@angular/common/http';
 
 // Rutas
-import { app_routing } from "./app.routes";
-
-//Servicios
-import { InformacionService } from "./services/informacion.service";
-import { ProductosService } from "./services/productos.service";
+import { AppRoutingModule } from './app-routing.module';
 
 // Componentes
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { PortafolioComponent } from './components/portafolio/portafolio.component';
-import { AboutComponent } from './components/about/about.component';
-import { ProductoComponent } from './components/producto/producto.component';
-import { SearchComponent } from './components/search/search.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { PortafolioComponent } from './pages/portafolio/portafolio.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ItemComponent } from './pages/item/item.component';
+import { SearchComponent } from './pages/search/search.component';
 
 
 @NgModule({
@@ -27,18 +23,16 @@ import { SearchComponent } from './components/search/search.component';
     FooterComponent,
     PortafolioComponent,
     AboutComponent,
-    ProductoComponent,
+    ItemComponent,
     SearchComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-    app_routing
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [
-    InformacionService,
-    ProductosService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

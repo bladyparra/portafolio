@@ -2,7 +2,7 @@
   <section class="ae-container-fluid ae-container-fluid--inner rk-portfolio animated fadeIn">
 
     <!-- 1 -->
-    <div align="center" *ngIf="_ps.cargando_productos">
+    <div align="center" *ngIf="_ps.cargando">
       <h2>Cargando...</h2>
       <div class="loader loader--style1" title="0" align="center">
         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -20,10 +20,10 @@
       <p>Espere por favor</p>
     </div>
 
-    <div *ngIf="_ps.productos.length > 0 && !_ps.cargando_productos"
+    <div *ngIf="_ps.productos.length > 0 && !_ps.cargando"
           class="ae-masonry ae-masonry-md-2 ae-masonry-xl-4 animated fadeIn">
-      <a *ngFor="let producto of _ps.productos" 
-          [routerLink]="[ '/producto', producto.cod ]" 
+      <a *ngFor="let producto of _ps.productos"
+          [routerLink]="[ '/item', producto.cod ]"
           class="rk-item ae-masonry__item">
         <img src="assets/productos/{{ producto.url }}" alt="">
         <div class="item-meta">

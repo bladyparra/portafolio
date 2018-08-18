@@ -1,6 +1,6 @@
   <div *ngIf="producto">
     <!-- item-inside-1 -->
-    <header [ngStyle]="{ 'background-image': 'url(assets/productos/'+ cod +'/main.jpg)' }" 
+    <header [ngStyle]="{ 'background-image': 'url(assets/productos/'+ id +'/main.jpg)' }"
       class="rk-portfolio-cover">
       <div class="item-inside__meta">
         <h1 class="ae-u-bolder rk-portfolio-title ">{{ producto.producto }}</h1>
@@ -33,12 +33,12 @@
           </p>
         </div>
         <div class="ae-grid__item item-lg-6 item-lg--offset-1">
-          <img src="assets/productos/{{ cod }}/pic-1.jpg" alt="Urku Portfolio">
+          <img src="assets/productos/{{ id }}/pic-1.jpg" alt="Urku Portfolio">
         </div>
       </div>
       <div class="ae-grid ae-grid--collapse">
         <div class="ae-grid__item item-lg-8">
-          <img src="assets/productos/{{ cod }}/pic-2.jpg" alt="Urku Portfolio">
+          <img src="assets/productos/{{ id }}/pic-2.jpg" alt="Urku Portfolio">
         </div>
         <div class="ae-grid__item item-lg-3 item-lg--offset-1 au-lg-ptp-1">
           <p>

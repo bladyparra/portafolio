@@ -1,64 +1,66 @@
 import { Injectable } from '@angular/core';
-import { Http } from "@angular/http";
-import { Promise } from 'q';
+import { HttpClient } from '@angular/common/http';
+import { Producto } from '../interfaces/producto.interfaces';
+// import { resolve } from '../../../node_modules/@types/q';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductosService {
+  cargando = true;
+  productos: Producto[] = [];
+  productosFiltrado: Producto[] = [];
 
-  productos:any[] = [];
-  productos_filtardo:any[] = [];
-  cargando_productos = false;
-
-  constructor( private http:Http ) { 
-    this.cargar_productos ();
+  constructor(private http: HttpClient) {
+    this.cargarProductos();
   }
 
-  public buscar_producto( termino:string ){
-    // console.log( "Buscando producto" );
-    // console.log( this.productos.length );
+  private cargarProductos() {
+    return new Promise((resolve, reject) => {
+      this.http
+        .get('https://portafolioweb-a486f.firebaseio.com/productos_idx.json')
+        .subscribe((resp: Producto[]) => {
+          this.productos = resp;
+          // setTimeout( () => {
+          this.cargando = false;
+          resolve();
+          // }, 1500);
+        });
+    });
+  }
 
+  getProducto(id: string) {
+    return this.http.get(
+      `https://portafolioweb-a486f.firebaseio.com/productos/${id}.json`
+    );
+  }
+
+  buscarProducto(termino: string) {
     if (this.productos.length === 0) {
-      this.cargar_productos().then( () => {
-        // termino la carga
-        this.filtrar_productos( termino );
+      // Cargar Productos
+      this.cargarProductos().then(() => {
+        // Se eejcuta despues de cargar los productos
+        // Aplicar filtro
+        this.filtrarProductos( termino );
       });
     } else {
-      this.filtrar_productos( termino );
+      // Aplicar el filtro
+      this.filtrarProductos( termino );
     }
   }
 
-  private filtrar_productos( termino:string ){
-    this.productos_filtardo = [];
-    termino = termino.toLowerCase();
+  private filtrarProductos( termino: string ) {
+    // console.log(this.productos);
+    this.productosFiltrado = [];
+
+    termino = termino.toLocaleLowerCase();
+
     this.productos.forEach( prod => {
-      if ( prod.categoria.indexOf( termino ) >= 0 || prod.titulo.toLowerCase().indexOf( termino ) >= 0 ) {
-        this.productos_filtardo.push( prod );
-        // console.log( prod );
+      const tituloLower = prod.titulo.toLocaleLowerCase();
+
+      if (prod.categoria.indexOf(termino) >= 0 || tituloLower.indexOf( termino ) >= 0 ) {
+        this.productosFiltrado.push( prod );
       }
-      // console.log(prod);
-    })
-  }
-
-  public cargar_producto ( cod:string ) {
-    return this.http.get(`https://portafolioweb-a486f.firebaseio.com/productos/${ cod }.json`)
-  }
-
-  public cargar_productos () {
-    this.cargando_productos = true;
-    
-    let promesa =  Promise ( ( resolve, reject ) => {
-      this.http.get('https://portafolioweb-a486f.firebaseio.com/productos_idx.json')
-                .subscribe ( res => {
-                  // console.log( res.json() );
-                  setTimeout( () => {
-                    this.cargando_productos = false;
-                    this.productos = res.json();
-                    // resolve();
-                  }, 1500);
-                });
     });
-    
-    return promesa;
-      
   }
 }
